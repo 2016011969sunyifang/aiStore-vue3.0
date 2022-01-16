@@ -1,0 +1,33 @@
+name: Hello World
+on:
+  push:
+  branches:
+    - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+      - name: instal node.js
+        uses: actions/setup-node@v1
+        with: ndoe-version:14.0.0
+      - name: npm i
+        run: npm install
+      - name: build
+        run: npm run build
+      - name: deploy
+        uses: easingthemes/ssh-deploy@v2.1.1
+        env:
+          # 私钥
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          # scp参数
+          ARGS: "-avzr --delete"
+          # 源目录
+          SOURCE: "dist"
+          #服务器IP
+          REMOTE_HOST: "106.14.196.158"
+          #用户
+          REMOTE_USER: "root"
+          #目标地址
+          TARGET: "/root/aiStore"

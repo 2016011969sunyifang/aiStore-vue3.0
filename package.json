@@ -1,6 +1,6 @@
 {
   "private": "true",
-  "name": "vue-in-action-vite",
+  "name": "aistore-vue3.0",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -16,6 +16,7 @@
     "*.{js,vue}": "npm run lint"
   },
   "dependencies": {
+    "@vitejs/plugin-vue": "^2.0.1",
     "vue": "^3.0.2"
   },
   "devDependencies": {
@@ -34,7 +35,7 @@
     "postcss": "^8.1.4",
     "prettier": "^1.19.1",
     "typescript": "^3.9.7",
-    "vite": "^1.0.0-rc.8",
+    "vite": "^2.5.10",
     "vue-jest": "^5.0.0-alpha.3",
     "yorkie": "^2.0.0"
   }

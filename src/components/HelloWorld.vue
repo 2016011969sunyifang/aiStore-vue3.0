@@ -8,6 +8,7 @@ export default {
   props: {
     msg: String,
   },
+
   data() {
     return {
       count: 0,
