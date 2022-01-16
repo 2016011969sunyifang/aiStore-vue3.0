@@ -11,7 +11,8 @@ jobs:
         uses: actions/checkout@master
       - name: instal node.js
         uses: actions/setup-node@v1
-        with: node-version: 14.0.0
+        with:
+          node-version: 14.0.0
       - name: npm i
         run: npm install
       - name: build
