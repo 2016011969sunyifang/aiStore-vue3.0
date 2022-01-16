@@ -9,8 +9,7 @@
     "test": "jest --runInBand"
   },
   "gitHooks": {
-    "pre-commit": "lint-staged",
-    "pre-push": "npm run test"
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "*.{js,vue}": "npm run lint"
