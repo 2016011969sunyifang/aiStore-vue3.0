@@ -1,72 +1,96 @@
 <template>
-  <div>
-    请输入姓名：
-    <input type="text" v-model="name" />
-  </div>
-  <div>
-    请输入age：
-    <input type="text" v-model="age" />
-  </div>
-  当前输入为：<span>{name:{{ name }},age:{{ age }}}</span>
-  <h1>{{ msg }}12344533334</h1>
-  转换结果为：<span>{{ yamlStr }}</span>
+  <n-data-table
+    :columns="columns"
+    :data="bData"
+    :max-height="250"
+    :scroll-x="1800"
+    virtual-scroll
+  />
+  <div>{{ returnCitySN["cip"] }}</div>
 </template>
 
-<script>
-// import YAML from "yaml";
-import yaml from "js-yaml";
-export default {
-  name: "HelloWorld",
-  props: {
-    msg: String,
+<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+
+<script lang="ts">
+import { h, defineComponent } from 'vue'
+import type { DataTableColumns } from 'naive-ui'
+
+type RowData = {
+  key: number
+  name: string
+  age: number
+  address: string
+}
+
+const columns: DataTableColumns<RowData> = [
+  {
+    type: 'selection',
+    fixed: 'left'
   },
-  mounted() {
-    let obj = { name: "zhoumaolin1" };
-    let c = this.json2yaml(JSON.stringify(obj));
-    console.log(c);
+  {
+    title: 'Name',
+    key: 'name',
+    width: 200,
+    fixed: 'left'
   },
-  data() {
-    return {
-      count: 0,
-      name: "",
-      age: "",
-      yamlStr: "",
-    };
+  {
+    title: 'Age',
+    key: 'age',
+    width: 100,
+    fixed: 'left'
   },
-  watch: {
-    name: {
-      immediate: true,
-      handler() {
-        console.log("123123");
-        this.yamlStr = this.json2yaml(
-          JSON.stringify({ name: this.name, age: this.age })
-        );
-      },
+  {
+    title: 'Row',
+    key: 'row',
+    render (row, index) {
+      return h('span', ['row ', index])
+    }
+  },
+  {
+    title: 'Row1',
+    key: 'row1',
+    render (row, index) {
+      return h('span', ['row ', index])
+    }
+  },
+  {
+    title: 'Row2',
+    key: 'row2',
+    render (row, index) {
+      return h('span', ['row ', index])
     },
-    age: {
-      immediate: true,
-      handler() {
-        console.log("123123");
-        this.yamlStr = this.json2yaml(
-          JSON.stringify({ name: this.name, age: this.age })
-        );
-      },
-    },
+    width: 100,
+    fixed: 'right'
   },
-  methods: {
-    json2yaml(jsonStr) {
-      try {
-        return {
-          data: yaml.dump(JSON.parse(jsonStr)),
-          error: false,
-        };
-      } catch (err) {
-        return {
-          data: "",
-          error: true,
-        };
+  {
+    title: 'Address',
+    key: 'address',
+    width: 200,
+    fixed: 'right'
+  }
+]
+
+export default defineComponent({
+  setup () {
+    const data: RowData[] = Array.from({ length: 50000 }).map((_, index) => ({
+      key: index,
+      name: `Edward King ${index}`,
+      age: 32,
+      address: `London, Park Lane no. ${index}`
+    }))
+    let bData =[
+      {
+        name: '11akioni',
+        age: 9,
+      address: `London, Park Lane no.`,
+      key:'123213sdaqwe',
+      children:data
       }
-    },
-  },
-};
+    ]
+    return {
+      bData,
+      columns
+    }
+  }
+})
 </script>
